@@ -1,33 +1,5 @@
-# A Production Based FastAPI-MongoDB Template
-I have used Beanie ODM for MongoDB database model with FastAPI.
-<p>
-    <a href="https://github.com/MahmudJewel/FastAPI-MongoDB-Template/fork">
-        <img src="https://img.shields.io/github/forks/MahmudJewel/FastAPI-MongoDB-Template.svg?style=social&label=Fork" />
-    </a>
-    <a href="https://github.com/MahmudJewel/FastAPI-MongoDB-Template/fork">
-        <img src="https://img.shields.io/github/stars/MahmudJewel/FastAPI-MongoDB-Template.svg?style=social&label=Stars" />
-    </a>
-    <!-- <a href="https://github.com/MahmudJewel/FastAPI-MongoDB-Template/fork">
-        <img src="https://img.shields.io/nuget/dt/Azylee.Core.svg" />
-    </a> -->
-</p>
-<p>
-    If the repo is helpful for you, please give a star and fork it.
-</p>
-<a href="https://github.com/MahmudJewel/FastAPI-MongoDB-Template/fork">
-    Click here to download/fork the repository
-</a>
+# IT Job
 
-## Features:
-* FastAPI project structure tree
-* user module
-    - id, first name, last name, **email** as username, **password**, role, is_active created_at, updated_at 
-* RBAC implementation
-* authentication => JWT
-* middleware
-* three types of server
-    - production, development, test
-* UUID as primary key
 
 ## User module's API
 | SRL | METHOD | ROUTE | FUNCTIONALITY | Fields | Access | 
@@ -141,19 +113,6 @@ session operates in a virtual environment set up by `venv`.
     python-jose
     python-dotenv
     google-auth
-
-### How do I migrate db?
-
-- Create a migration script inside the /migrations/migrations_scripts/
-- Activate virtual environment
-- Go to migration_runner folder(cd migrations/migration_runner)
-    ```python
-    cd migrations/migration_runner
-    python migration_runner.py --all  # it will execute all migrations
-    python migration_runner.py script_name  # it will execute the one specified script
-    ```
-- Migration will be applied and kept track to the db under migrations collections.
-- Migration logs will be found mingrations/logs/migration.log
 
 ### Happy Coding
 
