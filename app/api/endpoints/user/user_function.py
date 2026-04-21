@@ -7,8 +7,8 @@ from passlib.context import CryptContext
 from jose import JWTError, jwt
 
 # import 
-from app.models import user as UserModel
-from app.schemas.user import UserCreate, UserUpdate, User, Token 
+from app.models import user_model as UserModel
+from app.schemas.user_schema import UserCreate, UserUpdate, User, Token 
 from app.utils.env import SECRET_KEY, REFRESH_SECRET_KEY, ALGORITHM
 from app.core.dependencies import oauth2_scheme
 from app.core.settings import ACCESS_TOKEN_EXPIRE_DAYS

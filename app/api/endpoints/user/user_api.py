@@ -5,9 +5,9 @@ from beanie import PydanticObjectId
 from typing import Annotated
 
 # import 
-from app.schemas.user import User, UserCreate, UserUpdate
-from app.api.endpoints.user import functions as user_functions
-from app.models import user as UserModel
+from app.schemas.user_schema import User, UserCreate, UserUpdate
+from app.api.endpoints.user import user_function as user_functions
+from app.models import user_model as UserModel
 from app.core.rolechecker import RoleChecker
 
 logger = logging.getLogger(__name__)
