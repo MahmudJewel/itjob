@@ -116,3 +116,40 @@ session operates in a virtual environment set up by `venv`.
 
 ### Happy Coding
 
+## Integration Tests
+
+### 1. Install test dependencies
+
+```sh
+(venv)$ pip install -r requirements.txt
+(venv)$ pip install -r dev.txt
+```
+
+### 2. Run integration tests
+
+```sh
+# run all integration tests
+(venv)$ python scripts/run_integration_tests.py -q
+
+# run single integration file
+(venv)$ python scripts/run_integration_tests.py test_users -q
+
+# run single test function
+(venv)$ python scripts/run_integration_tests.py "test_users::test_create_user_creates_db_object" -q
+```
+
+### 3. Database mode
+
+```sh
+# same db (default), objects remain in db
+(venv)$ python scripts/run_integration_tests.py --db-name itjob_test -q
+
+# separate db per run
+(venv)$ python scripts/run_integration_tests.py --db-name itjob_test --separate-db -q
+```
+
+Notes:
+- Test startup uses app lifespan, so Beanie init runs.
+- Tests verify user object inserted in MongoDB.
+- Created test objects stay in DB (no auto cleanup).
+
