@@ -10,7 +10,7 @@ class RoleChecker:
 
 	# import auth
 	def __call__(self, user: User = Depends(UserFunctions.get_current_user)):
-		if user.role not in self.allowed_roles:
+		if not any(role.value in self.allowed_roles for role in user.role):
 			# logger.debug(f"User with role {user.role} not in {self.allowed_roles}")
 			raise HTTPException(status_code=403, detail="You are not allowed to access the API")
 

@@ -46,7 +46,7 @@
 # schema.py
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 from beanie import PydanticObjectId
 
 from app.utils.constant.globals import UserRole
@@ -58,6 +58,7 @@ class UserCreate(UserBase):
     password: str
     first_name: Optional[str] = None
     last_name: Optional[str] = None
+    mobile_number: Optional[str] = None
 
 class UserLogin(UserBase):
     password: str
@@ -67,7 +68,8 @@ class User(UserBase):
     first_name: Optional[str]
     last_name: Optional[str]
     is_active: bool
-    role: Optional[UserRole]
+    role: List[UserRole]
+    mobile_number: Optional[str]
     created_at: datetime
     updated_at: datetime
 
@@ -78,7 +80,7 @@ class UserUpdate(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     is_active: Optional[bool] = None
-    role: Optional[UserRole] = None
+    mobile_number: Optional[str] = None
 
 class Token(BaseModel):
     access_token: str

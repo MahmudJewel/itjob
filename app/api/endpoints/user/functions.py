@@ -13,7 +13,7 @@ from app.utils.env import SECRET_KEY, REFRESH_SECRET_KEY, ALGORITHM
 from app.core.dependencies import oauth2_scheme
 from app.core.settings import ACCESS_TOKEN_EXPIRE_DAYS
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=["argon2"], deprecated="auto")
 
 # get user by email 
 async def get_user_by_email(email: str):
@@ -29,8 +29,12 @@ async def get_user_by_id(user_id: PydanticObjectId):
 
 # crete new user 
 async def create_new_user(user: UserCreate):
-    hashed_password = pwd_context.hash(user.password)
-    new_user = UserModel.User(email=user.email, password=hashed_password, first_name=user.first_name, last_name=user.last_name)
+    # Truncate password to 72 bytes for bcrypt
+    password_bytes = user.password.encode('utf-8')
+    truncated_bytes = password_bytes[:72]
+    truncated_password = truncated_bytes.decode('utf-8', errors='replace')
+    hashed_password = pwd_context.hash(truncated_password)
+    new_user = UserModel.User(email=user.email, password=hashed_password, first_name=user.first_name, last_name=user.last_name, mobile_number=user.mobile_number)
     # new_user = UserModel.User(**user.model_dump())
     await new_user.insert()
     return new_user
@@ -102,7 +106,7 @@ async def refresh_access_token(refresh_token: str):
             raise HTTPException(status_code=401, detail="Invalid refresh token")
         access_token_expires = timedelta(days=ACCESS_TOKEN_EXPIRE_DAYS)
         access_token = await create_access_token(
-            data={"id": member.id, "email": member.email, "role": member.role},
+            data={"id": str(member.id), "email": member.email, "role": [r.value for r in member.role]},
             expires_delta=access_token_expires
         )
         return Token(access_token=access_token, refresh_token=refresh_token, token_type="bearer")
