@@ -1,0 +1,16 @@
+# Ignore specific folders
+.agents/
+/venv/
+/__pycache__/
+/.pytest_cache/
+/.git/
+/itjob/venv/
+
+# Ignore environment variables/secrets
+.env
+
+# Ignore specific file types
+skills-lock.json
+*.pyc
+*.pyo
+*.log
