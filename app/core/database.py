@@ -7,7 +7,7 @@ import logging
 
 from app.utils.env import MONGODB_URL, ClUSTER_NAME
 from app.models import user_model as UserModel
-from app.models import Category, SubCategory, Topic
+from app.models import Category, SubCategory, Topic, Question
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +17,7 @@ async def init():
     client = AsyncIOMotorClient(MONGODB_URL)
     database = client.get_database(ClUSTER_NAME)
     logger.info(f"=====> DB connected : {MONGODB_URL}")
-    await init_beanie(database, document_models=[UserModel.User, Category, SubCategory, Topic])
+    await init_beanie(database, document_models=[UserModel.User, Category, SubCategory, Topic, Question])
 
 @db_module.on_event("startup")
 async def on_startup():

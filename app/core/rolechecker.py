@@ -17,8 +17,8 @@ class RoleChecker:
 
 
 # Dependency to check if user is admin or editor
-def admin_editor_only(current_user):
-    if current_user.role not in [UserRole.ADMIN, UserRole.EDITOR]:
+def admin_editor_only(current_user: User):
+    if not any(role in [UserRole.ADMIN, UserRole.EDITOR] for role in current_user.role):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Access denied. Admin or Editor role required."
