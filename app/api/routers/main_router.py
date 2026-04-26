@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 from app.api.routers.user_router import user_router
+from app.api.routers.category_router import category_main_router
 from app.core.database import db_module
 router = APIRouter()
 
@@ -10,6 +11,7 @@ async def home_page():
 
 router.include_router(db_module)
 router.include_router(user_router)
+router.include_router(category_main_router)
 
 # from fastapi import APIRouter
 # from app.api.routers.user import user_router
